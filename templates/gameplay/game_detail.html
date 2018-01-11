@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    {{ game }}
+{% endblock title %}
+
+{% block styling %}
+    {{ block.super }}
+    <style type="text/css">
+        .tictactoe-table {
+        width: 300px ;
+        border-width: 2px;
+        }
+
+        .tictactoe-cell {
+         backgroud-color: #debb27;
+         width: 100px ;
+         height: 100px ;
+         text-align: center;
+         vertical-align: middle !important ;
+         font-size: 60px;
+         }
+    </style>
+{% endblock styling %}
+
+
+{% block content %}
+
+
+
+ This is the detail page for game {{ game.id }}
+{% endblock %}
+

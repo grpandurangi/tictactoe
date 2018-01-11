@@ -43,7 +43,7 @@ def accept_invitation(request , id):
         else:
             invitation.delete()
 
-        return redirect('player_home')
+        return redirect(game)
     else:
         return render(request,
                        "player/accept_invitation.html",

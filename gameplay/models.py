@@ -3,6 +3,7 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.db import models
 from django.db.models import Q
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 
 GAME_STATUS_CHOICES = (
@@ -34,6 +35,17 @@ class Game(models.Model):
     status = models.CharField(max_length=1, default='F' , choices=GAME_STATUS_CHOICES)
 
     objects = GamesQuerySet.as_manager()
+
+    def board(self):
+        """ Return a 2-D list of Move objects,
+        so you can ask for the state of a square at position [y][x]. """
+        board = [[ None for x in range(BOARD_SIZE)] for y in range(BOARD_SIZE)]
+        for move in self.move_set.all():
+            board[move.y][move.x] = move
+        return board
+
+    def get_absolute_url(self):
+        return reverse('gameplay_detail', args=[self.id])
 
     def __str__(self):
         return "{0} or {1}".format(
